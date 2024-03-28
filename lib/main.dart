@@ -76,11 +76,7 @@ class _RootAppState extends State<RootApp> {
                 ),
               );
             } else {
-              return const Scaffold(
-                body: Center(
-                  child: Text('Something went wrong!'),
-                ),
-              );
+              return const HomePage();
             }
           },
         ),

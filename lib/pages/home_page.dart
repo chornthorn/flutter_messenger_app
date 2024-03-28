@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import '../models/app_version_res.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.data, required this.currentVersion});
+  const HomePage({super.key, this.data, this.currentVersion});
 
-  final AppVersionResponse data;
-  final String currentVersion;
+  final AppVersionResponse? data;
+  final String? currentVersion;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Version: ${data.version}'),
+        title: Text('Database Version: ${data?.version}'),
       ),
       body: Column(
         children: [
           Center(
-            child: Text('currentVersion: $currentVersion'),
+            child: Text('App currentVersion: $currentVersion'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -29,6 +29,7 @@ class HomePage extends StatelessWidget {
             },
             child: const Text('Go to Second Page'),
           ),
+          const Text("Hello"), // static
         ],
       ),
     );

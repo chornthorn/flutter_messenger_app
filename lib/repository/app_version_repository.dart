@@ -4,7 +4,7 @@ import 'package:flutter_messenger_app/models/app_version_res.dart';
 
 import '../shared/http_client.dart';
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://localhost:3000/api/v1';
 
 Future<AppVersionResponse> checkAppVersion(
     String version, String platform) async {
@@ -13,13 +13,9 @@ Future<AppVersionResponse> checkAppVersion(
         await get('$baseUrl/app-versions/latest/$platform/$version');
     if (response.statusCode == 200) {
       final jsonObject = json.decode(response.body) as Map<String, dynamic>;
-      if (jsonObject['info'] != null) {
-        final newMap = Map<String, dynamic>.from(jsonObject['info']);
-        newMap['upToDate'] = jsonObject['upToDate'];
-        return AppVersionResponse.fromJson(newMap);
-      } else {
-        throw Exception('Failed to load app version');
-      }
+      final newMap = Map<String, dynamic>.from(jsonObject['info']);
+      newMap['upToDate'] = jsonObject['upToDate'];
+      return AppVersionResponse.fromJson(newMap);
     } else {
       throw Exception('Failed to load app version');
     }
